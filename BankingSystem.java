@@ -2,13 +2,12 @@ import java.util.*;
 
 public class BankingSystem {
 
-  static HashMap<String, String> userCredentials = new HashMap<String, String>();
-  static HashMap<String, Integer> security = new HashMap<String, Integer>();
-  static double[] balances = new double[100] ; //balance
+  static HashMap<String, String> userCredentials = new HashMap<String, String>(); //username, password
+  static double[] balances = new double[100] ; //balance array
 
   public static void main(String[] args) {
     int accountNum = 0001;
-    Arrays.fill(balances, 0.0);
+    Arrays.fill(balances, 0.0); 
     
     Scanner input = new Scanner(System.in);
 
@@ -20,6 +19,7 @@ public class BankingSystem {
 
     int option;
     do {
+      //Home Page
       System.out.println("1. Login");
       System.out.println("2. Create New Account");
       System.out.println("3. Exit");
@@ -32,10 +32,11 @@ public class BankingSystem {
         System.out.println("Login Again:");
         login();
       }else if(option == 3) {
-    	  break;
+    	  break; //Exit
       } 
       int num;
       do {
+        //Banking Page
         System.out.println("1. Check Balance");
         System.out.println("2. Deposit");
         System.out.println("3. Withdraw");
@@ -43,7 +44,7 @@ public class BankingSystem {
         num = input.nextInt();
         if (num == 1) {
           System.out.println("Your current balance is $" + balances[accountNum-1]);
-        } else if (num == 2) {
+        } else if (num == 2) { 
           System.out.print("Enter amount to deposit: $");
           double deposit = input.nextDouble();
           balances[accountNum-1] += deposit;
@@ -65,9 +66,11 @@ public class BankingSystem {
     } while (option != 3);
   }
 
+  // Method to make new account
   public static void newAccount(int accountNum) {
     Scanner input = new Scanner(System.in);
     Random rand = new Random();
+    //Asks info
     System.out.print("Name: ");
     String name = input.nextLine();
     System.out.print("Username: ");
@@ -75,17 +78,15 @@ public class BankingSystem {
     System.out.print("Password: ");
     String password = input.next();
 
-    // Store user credentials in the map
+    // Store user credentials in the hashmap
     userCredentials.put(username, password);
 
     System.out.println("Congratulations! Your account has been created.");
     System.out.println("Your Account Number is: " + accountNum);
-    security.put(name, accountNum);
-
     System.out.println("Please Log in Again.\n");
-    //return accountNum;
   }
 
+  //Method to allow user to login
   public static void login() {
     Scanner input = new Scanner(System.in);
     System.out.print("Enter Username: ");
